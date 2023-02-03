@@ -6,7 +6,7 @@ import { animateScroll as scroll } from "react-scroll";
 import idiomaContext from "../../context/idioma/idiomaContext";
 import { corporativoEnglish, corporativoSpanish } from "./constants";
 
-const corporativoModule = () => {
+const CorporativoModule = () => {
   const { idioma } = useContext(idiomaContext);
 
   const { ocultarEnlaces } = useContext(useEnlacesContext);
@@ -116,4 +116,4 @@ const corporativoModule = () => {
   );
 };
 
-export default corporativoModule;
+export default CorporativoModule;

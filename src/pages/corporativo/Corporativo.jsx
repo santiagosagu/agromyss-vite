@@ -1,6 +1,6 @@
 import React from "react";
 import { Contenido } from "./style";
-import CorporativoModule from "../../modules/corporativo/corporativoModule";
+import CorporativoModule from "../../modules/corporativo/CorporativoModule";
 
 const Corporativo = () => {
   return (
