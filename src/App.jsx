@@ -4,6 +4,8 @@ import UseEnlaces from "./context/enlaces/UseEnlaces";
 import IdiomaState from "./context/idioma/idiomaState";
 import RoutesComponent from "./routes/RoutesComponent";
 import CarritoState from "./context/carritoContext/CarritoContext";
+import "./App.css";
+import "./index.css";
 
 function App() {
   return (

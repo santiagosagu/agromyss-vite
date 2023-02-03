@@ -2,6 +2,10 @@ import Styled from "@emotion/styled";
 
 export const Contenedor = Styled.div`
 
+    h1 {
+    font-size: 1.5rem;
+    }
+
     .banner{
         background-image: url('/images/contactenos.jpg');
         width: 100%;

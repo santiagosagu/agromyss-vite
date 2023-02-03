@@ -24,6 +24,7 @@
     "react-router-dom": "^6.6.2",
     "react-scroll": "^1.8.9",
     "sort-by": "^1.2.0",
+    "standard": "^17.0.0",
     "sweetalert2": "^11.6.16"
   },
   "devDependencies": {
@@ -34,5 +35,22 @@
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4",
     "vite": "^4.0.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/standard/eslintrc.json"
+    ],
+    "rules": {
+      "eqeqeq": "off",
+      "curly": "error",
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "semi": "off",
+      "comma-dangle": "off",
+      "jsx-quotes": "off",
+      "space-before-function-paren": "off"
+    }
   }
 }
