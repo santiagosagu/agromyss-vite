@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React, { useContext, useEffect } from "react";
 import Swal from "sweetalert2";
 import { db } from "../../FirebaseConfig";
@@ -29,46 +30,65 @@ const CarritoState = (props) => {
     guardarDatos();
   }, [autenticado]);
 
-  React.useEffect(() => {
-    const carrito = datosCarrito.filter(
-      (item) => item.usuarioPedido === autenticado?.uid
-    );
+  const updateStorageCarrito = () => {
+    const carrito = JSON.parse(localStorage.getItem("carrito"));
+    if (carrito) {
+      setcarritoUsuario(carrito);
+    }
+  };
 
-    setcarritoUsuario(carrito);
-  }, [datosCarrito, autenticado]);
+  React.useEffect(() => {
+    updateStorageCarrito();
+  }, []);
 
   const agregarCarrito = (product) => {
+    product.cantidad = 1;
+    product.precioSumado = product.precio;
+
+    // eslint-disable-next-line no-undef
+    const data = JSON.parse(localStorage.getItem("carrito"));
+
+    if (data) {
+      localStorage.setItem("carrito", JSON.stringify([...data, product]));
+    } else {
+      localStorage.setItem("carrito", JSON.stringify([product]));
+    }
+
+    updateStorageCarrito();
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener("mouseenter", Swal.stopTimer);
+        toast.addEventListener("mouseleave", Swal.resumeTimer);
+      },
+    });
+
+    Toast.fire({
+      icon: "success",
+      title: "Producto agregado al carrito!",
+    });
+
     if (autenticado) {
       const pedido = { producto: product, usuarioPedido: autenticado?.uid };
 
-      product.cantidad = 1;
-      product.precioSumado = product.precio;
-
       db.collection("carrito").add(pedido);
-
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener("mouseenter", Swal.stopTimer);
-          toast.addEventListener("mouseleave", Swal.resumeTimer);
-        },
-      });
-
-      Toast.fire({
-        icon: "success",
-        title: "Producto agregado al carrito!",
-      });
     }
   };
 
   const eliminarProductoCarrito = async (id) => {
-    const eliminar = await db.collection("carrito").doc(id);
+    console.log(id);
 
-    return eliminar.delete();
+    const result = carritoUsuario.filter((item) => item.id !== id);
+
+    console.log(result);
+    localStorage.setItem("carrito", JSON.stringify(result));
+
+    updateStorageCarrito();
   };
 
   const aumentarCantidad = async (id) => {

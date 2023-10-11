@@ -121,32 +121,31 @@ export default function CarritoModal({ open, handleClose }) {
             </div>
           </Link>
           <div id="modal-modal-description" sx={{ mt: 2 }}>
-            {carritoUsuario?.map((item) => (
-              <Card>
+            {carritoUsuario?.map((item, index) => (
+              <Card key={index}>
                 <div className="content-img-description">
                   <div className="content-img">
-                    <img
-                      src={item.producto?.imagenes[0]}
-                      alt="producto-carrito"
-                    />
+                    <img src={item?.imagenes[0]} alt="producto-carrito" />
                   </div>
                   <div className="content-description">
-                    <h3>{item.producto.nombreProducto}</h3>
-                    <h3>$ {item.producto.precioSumado}</h3>
+                    <h3>{item?.nombreProducto}</h3>
+                    <h3>$ {item?.precioSumado}</h3>
                   </div>
                 </div>
 
                 <div className="update-qty">
                   <button
                     className="bg-slate-700 text-white px-4 py-2 rounded-full"
-                    onClick={() => aumentarCantidad(item.id)}
+                    onClick={() => aumentarCantidad(item?.id)}
                   >
                     <ArrowCircleUpIcon />
                   </button>
-                  <h4 className="text-center mt-3">{item.producto.cantidad}</h4>
+                  <h4 className="text-center mt-3">
+                    {item.producto?.cantidad}
+                  </h4>
                   <button
                     className="bg-red-700 text-white px-4 py-2 rounded-full"
-                    onClick={() => disminuirCantidad(item.id)}
+                    onClick={() => disminuirCantidad(item?.id)}
                   >
                     <ArrowCircleDownIcon />
                   </button>
@@ -154,7 +153,7 @@ export default function CarritoModal({ open, handleClose }) {
                 <div className="content-close">
                   <CloseIcon
                     style={{ cursor: "pointer" }}
-                    onClick={() => eliminarProductoCarrito(item.id)}
+                    onClick={() => eliminarProductoCarrito(item?.id)}
                   />
                 </div>
               </Card>

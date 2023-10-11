@@ -77,7 +77,7 @@ const Header = () => {
             <i
               className="fas fa-bars absolute top-[2%] right-[1%] text-3xl"
               onClick={() => mostrarenlaces()}
-            ></i>
+            />
             {verEnlaces && (
               <>
                 <div className="z-20 m-2 min-[1200px]:flex">
@@ -102,7 +102,7 @@ const Header = () => {
                     <i
                       className="fas fa-angle-down text-base right-4"
                       onClick={mostrarAndOcultarProductos}
-                    ></i>
+                    />
 
                     {verProductosServicios && (
                       <ul className="w-[90%] h-auto px-2 py-1 bg-[#343A1A] min-[1200px]:w-36 min-[1200px]:flex-col min-[1200px]:fixed">
@@ -335,7 +335,7 @@ const Header = () => {
                       <i
                         className="fas fa-angle-down"
                         onClick={mostrarAndOcultarSustentabilidad}
-                      ></i>
+                      />
                     </li>
                     {verSustentabilidad && (
                       <>
@@ -406,7 +406,7 @@ const Header = () => {
                       <i
                         className="fas fa-angle-down"
                         onClick={mostrarAndOcultarSobreAgromyss}
-                      ></i>
+                      />
                     </li>
                     {verSobreAgromyss && (
                       <>
@@ -477,25 +477,24 @@ const Header = () => {
                   )}
 
                   <div className="flex justify-center border-b-0 min-[1200px]:hidden">
-                    {autenticado ? (
-                      <>
-                        <CarritoIcon handleOpen={handleOpen} />
-                        <li className="list-none mr-4 cursor-pointer z-40 pt-2">
-                          <p style={{ fontWeight: "400" }}>
-                            {idioma === "español" ? "Hola:" : "Hi:"}{" "}
-                            {autenticado.displayName}
-                          </p>
-                        </li>
-                        <Button
+                    <>
+                      <CarritoIcon handleOpen={handleOpen} />
+                      {/* <li className="list-none mr-4 cursor-pointer z-40 pt-2">
+                        <p style={{ fontWeight: "400" }}>
+                          {idioma === "español" ? "Hola:" : "Hi:"}{" "}
+                          {autenticado.displayName}
+                        </p>
+                      </li> */}
+                      {/* <Button
                           variant="contained"
                           color="error"
                           onClick={cerrarSesion}
                         >
                           Cerrar Sesion
-                        </Button>
-                      </>
-                    ) : (
-                      <>
+                        </Button> */}
+                    </>
+                    {/* ) : ( */}
+                    {/* <>
                         <Button
                           variant="contained"
                           color="success"
@@ -503,8 +502,7 @@ const Header = () => {
                         >
                           Ingresar
                         </Button>
-                      </>
-                    )}
+                      </> */}
                   </div>
                 </div>
               </>
@@ -516,29 +514,28 @@ const Header = () => {
             className="hidden min-[1200px]:flex"
             style={{ justifyContent: "flex-end" }}
           >
-            {autenticado ? (
-              <>
-                <CarritoIcon handleOpen={handleOpen} />
-                <CarritoModal open={open} handleClose={handleClose} />
-                <li
-                  style={{ fontWeight: "bold" }}
-                  className="list-none mr-4 cursor-pointer z-40 pt-2"
-                >
-                  <p style={{ fontWeight: "400" }}>
-                    {idioma === "español" ? "Hola:" : "Hi:"}{" "}
-                    {autenticado.displayName}
-                  </p>
-                </li>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={cerrarSesion}
-                  className="mb-4"
-                >
-                  Cerrar Sesion
-                </Button>
-              </>
-            ) : (
+            <div>
+              <CarritoIcon handleOpen={handleOpen} />
+              <CarritoModal open={open} handleClose={handleClose} />
+              <li
+                style={{ fontWeight: "bold" }}
+                className="list-none mr-4 cursor-pointer z-40 pt-2"
+              >
+                {/* <p style={{ fontWeight: "400" }}>
+                  {idioma === "español" ? "Hola:" : "Hi:"}{" "}
+                  {autenticado?.displayName}
+                </p> */}
+              </li>
+              {/* <Button
+                variant="contained"
+                color="error"
+                onClick={cerrarSesion}
+                className="mb-4"
+              >
+                Cerrar Sesion
+              </Button> */}
+            </div>
+            {/* {!autenticado && (
               <>
                 <Button
                   variant="contained"
@@ -548,7 +545,7 @@ const Header = () => {
                   Ingresar
                 </Button>
               </>
-            )}
+            )} */}
           </div>
           <div
             className="dropdown dropstart mt-4"
