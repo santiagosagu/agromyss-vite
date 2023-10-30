@@ -4,7 +4,7 @@ import { useEnlacesContext } from "../../context/enlaces/UseEnlaces";
 import { animateScroll as scroll, scroller } from "react-scroll";
 import { Contenedor } from "./style";
 import { useParams } from "react-router-dom";
-import SobreAgromyssModule from "../../modules/sobreAgromyss/sobreAgromyss";
+import SobreAgromyssModule from "../../modules/sobreAgromyss/SobreAgromyssModule";
 
 const SobreAgromyss = (props) => {
   const { idioma } = useContext(idiomaContext);
