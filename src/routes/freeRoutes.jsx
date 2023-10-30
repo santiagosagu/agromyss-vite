@@ -4,6 +4,7 @@ import Home from "../pages/home/Home";
 import Sustentabilidad from "../pages/sustentabilidad/Sustentabilidad";
 import SobreAgromyss from "../pages/sobreAgromyss/SobreAgromyss";
 import Chocolatinas from "../modules/productos/chocolates/Chocolatinas";
+import DetalleProducto from "../modules/detallesProductos/DetallesProducto";
 
 export const freeRoutes = [
   {
@@ -34,5 +35,9 @@ export const freeRoutes = [
   {
     path: "/sobre-agromyss/:item",
     component: <SobreAgromyss />,
+  },
+  {
+    path: "/productos-servicios/productos/:producto/:detalle",
+    component: <DetalleProducto />,
   },
 ];

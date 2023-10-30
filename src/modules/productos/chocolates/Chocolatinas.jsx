@@ -4,6 +4,7 @@ import { db } from "../../../FirebaseConfig";
 import { animateScroll as scroll } from "react-scroll";
 import { useEnlacesContext } from "../../../context/enlaces/UseEnlaces";
 import { CarritoContext } from "../../../context/carritoContext/CarritoContext";
+import { useNavigate } from "react-router-dom";
 
 const Chocolatinas = () => {
   const [chocolatinas, setChocolatinas] = useState([]);
@@ -17,11 +18,13 @@ const Chocolatinas = () => {
 
   const { ocultarEnlaces } = useContext(useEnlacesContext);
 
+  const navigate = useNavigate();
+
   scroll.scrollTo();
 
   const verProducto = (categoria, producto) => {
     // eslint-disable-next-line no-undef
-    history.push(`/productos-servicios/productos/${categoria}/${producto}`);
+    navigate(`/productos-servicios/productos/${categoria}/${producto}`);
   };
 
   useEffect(() => {
