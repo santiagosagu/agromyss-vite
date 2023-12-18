@@ -1,34 +1,12 @@
 /* eslint-disable no-undef */
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Swal from "sweetalert2";
-import { db } from "../../FirebaseConfig";
-import authContext from "../auth/authContext";
 
 export const CarritoContext = React.createContext();
 
 const CarritoState = (props) => {
-  const [datosCarrito, setDatosCarrito] = React.useState([]);
   const [carritoUsuario, setcarritoUsuario] = React.useState([]);
   const [totalPagar, setTotalPagar] = React.useState(0);
-
-  const { autenticado } = useContext(authContext);
-
-  React.useEffect(() => {
-    const guardarDatos = async () => {
-      await db.collection("carrito").onSnapshot((doc) => {
-        const result = doc.docs.map((item) => {
-          return {
-            id: item.id,
-            ...item.data(),
-          };
-        });
-
-        setDatosCarrito(result);
-      });
-    };
-
-    guardarDatos();
-  }, [autenticado]);
 
   const updateStorageCarrito = () => {
     const carrito = JSON.parse(localStorage.getItem("carrito"));
@@ -72,12 +50,6 @@ const CarritoState = (props) => {
       icon: "success",
       title: "Producto agregado al carrito!",
     });
-
-    if (autenticado) {
-      const pedido = { producto: product, usuarioPedido: autenticado?.uid };
-
-      db.collection("carrito").add(pedido);
-    }
   };
 
   const eliminarProductoCarrito = async (id) => {
@@ -85,52 +57,61 @@ const CarritoState = (props) => {
 
     const result = carritoUsuario.filter((item) => item.id !== id);
 
-    console.log(result);
     localStorage.setItem("carrito", JSON.stringify(result));
 
     updateStorageCarrito();
   };
 
   const aumentarCantidad = async (id) => {
-    const productoModificar = await datosCarrito.find((item) => item.id === id);
+    const productoModificar = await carritoUsuario.find(
+      (item) => item.id === id
+    );
 
-    const productoModificarCantidad = productoModificar.producto.cantidad + 1;
+    const productoModificarCantidad = productoModificar.cantidad + 1;
 
-    productoModificar.producto.cantidad = productoModificarCantidad;
+    productoModificar.cantidad = productoModificarCantidad;
 
     const productoModificarPrecio =
-      productoModificar.producto.precio * productoModificarCantidad;
+      productoModificar.precio * productoModificarCantidad;
 
-    productoModificar.producto.precioSumado = productoModificarPrecio;
+    productoModificar.precioSumado = productoModificarPrecio;
 
-    const productoModificarCantidadDB = await db.collection("carrito").doc(id);
+    const data = await JSON.parse(localStorage.getItem("carrito"));
 
-    return productoModificarCantidadDB.update({
-      producto: productoModificar.producto,
-    });
+    const otrosItems = data?.filter((item) => item.id !== id);
+
+    localStorage.setItem(
+      "carrito",
+      JSON.stringify([productoModificar, ...otrosItems])
+    );
+
+    updateStorageCarrito();
   };
 
   const disminuirCantidad = async (id) => {
-    const productoModificar = await datosCarrito.find((item) => item.id === id);
+    const productoModificar = await carritoUsuario.find(
+      (item) => item.id === id
+    );
 
-    if (productoModificar.producto.cantidad > 1) {
-      const productoModificarCantidad = productoModificar.producto.cantidad - 1;
+    const productoModificarCantidad = productoModificar.cantidad - 1;
 
-      productoModificar.producto.cantidad = productoModificarCantidad;
+    productoModificar.cantidad = productoModificarCantidad;
 
-      const productoModificarPrecio =
-        productoModificar.producto.precio * productoModificarCantidad;
+    const productoModificarPrecio =
+      productoModificar.precio * productoModificarCantidad;
 
-      productoModificar.producto.precioSumado = productoModificarPrecio;
+    productoModificar.precioSumado = productoModificarPrecio;
 
-      const productoModificarCantidadDB = await db
-        .collection("carrito")
-        .doc(id);
+    const data = await JSON.parse(localStorage.getItem("carrito"));
 
-      return productoModificarCantidadDB.update({
-        producto: productoModificar.producto,
-      });
-    }
+    const otrosItems = data?.filter((item) => item.id !== id);
+
+    localStorage.setItem(
+      "carrito",
+      JSON.stringify([productoModificar, ...otrosItems])
+    );
+
+    updateStorageCarrito();
   };
 
   useEffect(() => {
@@ -138,9 +119,9 @@ const CarritoState = (props) => {
 
     const arregloTotalPagar = [];
 
-    if (autenticado && carritoUsuario.length > 0) {
+    if (carritoUsuario.length > 0) {
       carritoUsuario.forEach((item) => {
-        arregloTotalPagar.push(Number(item.producto.precioSumado));
+        arregloTotalPagar.push(Number(item.precioSumado));
       });
 
       for (let i = 0; i < arregloTotalPagar.length; i++) {
@@ -152,7 +133,7 @@ const CarritoState = (props) => {
     if (carritoUsuario.length === 0) {
       setTotalPagar(0);
     }
-  }, [carritoUsuario, autenticado]);
+  }, [carritoUsuario]);
 
   return (
     <CarritoContext.Provider

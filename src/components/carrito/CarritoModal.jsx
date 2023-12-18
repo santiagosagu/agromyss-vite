@@ -31,7 +31,7 @@ const Card = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #000;
-  padding: 0;
+  padding: 0 10rem 0 10rem;
 
   .content-img-description {
     display: flex;
@@ -128,8 +128,10 @@ export default function CarritoModal({ open, handleClose }) {
                     <img src={item?.imagenes[0]} alt="producto-carrito" />
                   </div>
                   <div className="content-description">
-                    <h3>{item?.nombreProducto}</h3>
-                    <h3>$ {item?.precioSumado}</h3>
+                    <h3 className="w-72">{item?.nombreProducto}</h3>
+                    <h3 className="text-lg font-bold ">
+                      $ {item?.precioSumado}
+                    </h3>
                   </div>
                 </div>
 
@@ -144,6 +146,7 @@ export default function CarritoModal({ open, handleClose }) {
                     {item.producto?.cantidad}
                   </h4>
                   <button
+                    disabled={item.cantidad === 1}
                     className="bg-red-700 text-white px-4 py-2 rounded-full"
                     onClick={() => disminuirCantidad(item?.id)}
                   >

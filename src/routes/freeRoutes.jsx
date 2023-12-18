@@ -5,6 +5,9 @@ import Sustentabilidad from "../pages/sustentabilidad/Sustentabilidad";
 import SobreAgromyss from "../pages/sobreAgromyss/SobreAgromyss";
 import Chocolatinas from "../modules/productos/chocolates/Chocolatinas";
 import DetalleProducto from "../modules/detallesProductos/DetallesProducto";
+import VideoCorporativoPagina from "../pages/VideoCorporativo";
+import Products from "../pages/products/Products";
+import Chocolates from "../pages/products/chocolates/Chocolates";
 
 export const freeRoutes = [
   {
@@ -14,6 +17,18 @@ export const freeRoutes = [
   {
     path: "/corporativo",
     component: <Corporativo />,
+  },
+  {
+    path: "/corporativo/video-corporativo",
+    component: <VideoCorporativoPagina />,
+  },
+  {
+    path: "/productos-servicios/productos",
+    component: <Products />,
+  },
+  {
+    path: "productos-servicios/productos/chocolates",
+    component: <Chocolates />,
   },
   {
     path: "/productos-servicios/productos/chocolates/chocolatinas",
