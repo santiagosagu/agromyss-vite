@@ -13,7 +13,7 @@ export const Contenido = Styled.div`
     }
     
     .contenedor-imagen{
-        background-image: url('/public/images/Productos.png');
+        background-image: url('/images/Productos.png');
         background-position: top center;
         background-repeat: no-repeat;
         background-size: cover;
