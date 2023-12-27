@@ -17,25 +17,53 @@ const Footer = () => {
         </div>
         <div className="mt-12 redes-sociales">
           <h3 className="text-center">SÍGUENOS EN REDES SOCIALES</h3>
-          <div className="flex justify-between px-11">
-            <div>
-              <img
-                src="/images/redes/facebook.png"
-                alt="icono-facebook"
-                width={"80rem"}
-                className="text-center"
-              />
-              <p className="text-slate-50">Agromyss</p>
-            </div>
-            <div>
-              <img
-                src="/images/redes/instagram.png"
-                alt="icono-instagram"
-                width={"80rem"}
-                className="ml-4"
-              />
-              <p>waikao.chocolates</p>
-            </div>
+          <div className="flex justify-center gap-8 px-11 flex-wrap">
+            <a
+              href="https://www.facebook.com/profile.php?id=100091191987779"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <img
+                  src="/images/redes/facebook.png"
+                  alt="icono-facebook"
+                  width="80rem"
+                  className="text-center"
+                />
+                <p className="text-slate-50">Agromyss</p>
+              </div>
+            </a>
+
+            <a
+              href="https://www.instagram.com/waikao.chocolates/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <img
+                  src="/images/redes/instagram.png"
+                  alt="icono-instagram"
+                  width="80rem"
+                  className="ml-4"
+                />
+                <p>waikao.chocolates</p>
+              </div>
+            </a>
+            <a
+              href="https://www.instagram.com/cafewaikaodelatrece/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <img
+                  src="/images/redes/instagram.png"
+                  alt="icono-instagram"
+                  width="80rem"
+                  className="ml-4"
+                />
+                <p>cafewaikaodelatrece</p>
+              </div>
+            </a>
           </div>
         </div>
         <div className="mt-12 xl:ml-3 2xl:ml-24">
