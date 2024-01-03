@@ -1,4 +1,5 @@
 import React from "react";
+import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 
 const HomeModule = ({
@@ -8,12 +9,78 @@ const HomeModule = ({
   iconoServicios,
   data,
 }) => {
+  const dataBanner = [
+    {
+      img: "https://firebasestorage.googleapis.com/v0/b/agromyss.appspot.com/o/362679521_655114549835398_4057088859359443818_n.jpg?alt=media&token=a078c375-76fb-4aab-b397-49bfeab2658b",
+      title: "cafe la 13",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat aspernatur consequatur quia totam perferendis impedit accusamus eum facere, est dicta fuga deleniti quidem voluptatibus excepturi provident iure! Sunt,exercitationem",
+      url: "https://www.instagram.com/cafewaikaodelatrece/",
+    },
+    {
+      img: "https://firebasestorage.googleapis.com/v0/b/agromyss.appspot.com/o/industria.jpg?alt=media&token=2fee6022-a54e-40de-96aa-00a1f2a22152",
+      title: "Productos",
+      text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis fugiat aspernatur consequatur quia totam perferendis impedit accusamus eum facere, est dicta fuga deleniti quidem voluptatibus excepturi provident iure! Sunt,exercitationem",
+      url: "productos-servicios/productos",
+    },
+  ];
+
   return (
     <>
       <div onMouseOver={ocultarEnlaces}>
-        <div className="banner">
+        {/* <div className="banner">
           <div>{data.banner}</div>
-        </div>
+
+        </div> */}
+
+        <Carousel
+          axis="horizontal"
+          autoPlay
+          infiniteLoop
+          centerSlidePercentage={10}
+          width="100%"
+          thumbWidth={30}
+          dynamicHeight
+          emulateTouch
+          showThumbs={false}
+        >
+          {dataBanner.map((item, index) => (
+            <div
+              key={index}
+              className="bg-cover object-center h-[60rem] bg-no-repeat overflow-hidden w-full bg-fixed flex flex-col justify-center"
+              style={{
+                backgroundImage: `url(${item.img})`,
+                backgroundPosition: "center center",
+              }}
+            >
+              <div
+                className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
+                style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
+              >
+                <div className="flex h-full items-center justify-center">
+                  <div className="text-white w-2/4">
+                    <h2 className="mb-12 text-4xl font-semibold uppercase">
+                      {item.title}
+                    </h2>
+                    <h4 className="mb-6 text-xl font-semibold text-center">
+                      {item.text}
+                    </h4>
+                    <a href={item.url} rel="noopener noreferrer">
+                      <button
+                        type="button"
+                        className="rounded border-2 border-neutral-50 px-7 pb-[8px] pt-[10px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                        data-te-ripple-init
+                        data-te-ripple-color="light"
+                      >
+                        Conocenos
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Carousel>
+
         {videoCorporativo}
 
         <div className="division">
